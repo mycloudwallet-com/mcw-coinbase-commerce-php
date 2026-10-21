@@ -5,6 +5,11 @@ use CoinbaseCommerce\Tests\GuzzleClientMock\GuzzleMockClientFactoryMethod;
 use PHPUnit\Framework\TestCase;
 use CoinbaseCommerce\ApiClient;
 
+class TestLogger
+{
+    public function warning($message) { return $message; }
+}
+
 class BaseTest extends TestCase
 {
     /**
@@ -16,7 +21,7 @@ class BaseTest extends TestCase
 
     protected $logger;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->initMockClient();
 
@@ -31,16 +36,16 @@ class BaseTest extends TestCase
         $this->apiClient = $this->getMockBuilder(ApiClient::getClassName())
             ->disableOriginalConstructor()
             ->disableOriginalClone()
-            ->setMethods(['getHttpClient'])
+            ->onlyMethods(['getHttpClient'])
             ->getMock();
 
         $this->apiClient
             ->method('getHttpClient')
             ->willReturn($client);
 
-        $this->logger = $this->getMockBuilder('LoggerClass')
-            ->setMethods(['warning'])
-            ->getMock('LoggerClass');
+        $this->logger = $this->getMockBuilder(TestLogger::class)
+            ->onlyMethods(['warning'])
+            ->getMock();
 
         $this->logger
             ->method('warning')

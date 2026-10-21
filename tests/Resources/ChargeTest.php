@@ -7,7 +7,7 @@ use CoinbaseCommerce\Tests\BaseTest;
 
 class ChargeTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Charge::setClient($this->apiClient);
@@ -44,11 +44,13 @@ class ChargeTest extends BaseTest
     }
 
     /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Update is not allowed
+
+
      */
     public function testSaveMethodWithId()
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Update is not allowed');
         $this->appendRequest(200, $this->parseJsonFile('charge.json'));
         $chargeObj = new Charge(
             [

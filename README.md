@@ -1,5 +1,10 @@
 [![CircleCI](https://circleci.com/gh/coinbase/coinbase-commerce-php/tree/master.svg?style=svg)](https://circleci.com/gh/coinbase/coinbase-commerce-php/tree/master)
 # Coinbase Commerce
+
+This Cloud Wallet compatibility branch targets PHP 8.4 and Guzzle 7. It preserves
+the existing charge and webhook APIs and updates native collection signatures.
+Run `composer install` and `composer test`; all HTTP requests in the test suite
+use Guzzle's mock handler.
 **Note: This repository is not actively maintained.**
 
 The official PHP library for the [Coinbase Commerce API](https://commerce.coinbase.com/docs/).
