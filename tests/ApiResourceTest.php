@@ -6,10 +6,12 @@ use PHPUnit\Framework\TestCase;
 
 class ApiResourceTest extends TestCase
 {
-    public function setUp()
+    private $apiResourceStub;
+
+    public function setUp(): void
     {
         parent::setUp();
-        $this->apiResourceStub = $this->getMockForAbstractClass(ApiResource::getClassName());
+        $this->apiResourceStub = new ApiResource();
     }
 
     public function callMethod($obj, $name, array $args)
